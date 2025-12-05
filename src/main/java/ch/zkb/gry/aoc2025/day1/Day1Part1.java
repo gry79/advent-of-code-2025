@@ -2,17 +2,24 @@ package ch.zkb.gry.aoc2025.day1;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class SecretEntrance {
-    public static void main(String[] args) {
+public class Day1Part1 {
+
+    private static final Logger logger = LoggerFactory.getLogger(Day1Part1.class);
+
+    public static long computePassword(InputStream is) {
         int position = 50;
         int count = 0;
 
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                if (line.isEmpty()) break;
+                line = line.trim();
+                if (line.isEmpty()) continue;
 
                 char direction = line.charAt(0);
                 int distance = Integer.parseInt(line.substring(1));
@@ -30,9 +37,11 @@ public class SecretEntrance {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Error reading input", e);
         }
 
-        System.out.println(count);
+        logger.info("Total passes over 0: {}", count);
+        return count;
     }
+
 }
