@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Day5Part2 {
@@ -60,7 +61,7 @@ public class Day5Part2 {
             return 0;
         }
 
-        freshRanges.sort((a, b) -> Long.compare(a[0], b[0]));
+        freshRanges.sort(Comparator.comparingLong(a -> a[0]));
 
         List<long[]> merged = new ArrayList<>();
         long[] current = freshRanges.get(0);
